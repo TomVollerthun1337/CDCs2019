@@ -8,6 +8,7 @@
 
 		<link rel="stylesheet" href="css/reveal.css">
 		<link rel="stylesheet" href="css/theme/white.css">
+		<link rel="stylesheet" href="plugin/title-footer/title-footer.css">
 
 		<!-- Theme used for syntax highlighting of code -->
 		<link rel="stylesheet" href="lib/css/zenburn.css">
@@ -17,8 +18,9 @@
 				box-shadow: none;
 				border: none;
 			}
-			.reveal .progress {
-				height: 12px;
+			.reveal #title-footer {
+		    bottom: calc(3px + 2.5vh) !important;
+		    height: 3vh;
 			}
 		</style>
 
@@ -27,7 +29,7 @@
 		<div class="reveal">
 			<div class="slides">
 				<section>
-					<section>
+					<section class='title' data-state='no-title-footer'>
 						<h1>CDCs für otto.de</h1>
 						<p>Continuous Everything (jetzt mit Cloud™)</p>
 						<p>Tom Vollerthun</p>
@@ -423,9 +425,11 @@
 					{ src: 'plugin/markdown/marked.js' },
 					{ src: 'plugin/markdown/markdown.js' },
 					{ src: 'plugin/notes/notes.js', async: true },
-					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/title-footer/title-footer.js', async: true, callback: function() { title_footer.initialize(' ', 'no-repeat url("img/otto_logo_2015.png") center center;'); } }
 				],
 				transition: 'none',
+				progress: true,
 			});
 		</script>
 	</body>
