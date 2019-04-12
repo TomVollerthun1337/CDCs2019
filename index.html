@@ -28,9 +28,12 @@
 			}
 			.reveal #title-footer {
 		    padding-left: 200px;
-		    height: 3vh;
+		    height: 53px;
 				line-height: 1em;
 		    text-align: left;
+			}
+			.reveal #title-footer p {
+		    margin-top: 19px;
 			}
 			.reveal .slides h1 {
 		    text-transform: none;
@@ -38,13 +41,34 @@
 			.reveal .slide-number {
 		    left: 50%;
 		    right: auto;
+				bottom: 3em;
+			}
+			.speaker-controls-notes {
+				font-size: 2em
 			}
 		</style>
 
+		<script>
+			function jumpToSlide(event) {
+				event.preventDefault();
+				var targetInput = document.getElementById('targetslide');
+				var target = targetInput.value;
+				targetInput.value = '';
+				Reveal.navigateTo(target);
+				setTimeout(function() {
+						Reveal.navigateLeft();
+				}, 10);
+				targetInput.blur();
+			}
+		</script>
+
 	</head>
 	<body>
+		<form onsubmit="jumpToSlide(event);">
+			<input id='targetslide'/>
+		</form>
 		<div class="reveal">
-			<div class="slides">
+			<div class="slides" id='slides'>
 				<section class='title' data-state='no-title-footer'>
 		      <img class="stretch" src="title.png"/>
 
@@ -74,6 +98,7 @@
 							<li>1961</li>
 							<li>Univac III</li>
 							<li>Host-Ablösung Sprint-Projekt 2016</li>
+							<li>Deployments: einmal</li>
 						</ul>
 					</aside>
 		    </section>
@@ -87,26 +112,27 @@
 							<li>Dann auch mit Online-Bestellung</li>
 							<li>Deployments: halbjährlich</li>
 						</ul>
-					</aside>
-		    </section>
-		    <section>
-		      <img class="stretch" src="img/ottode2000.png"/>
-					<aside class="notes">
+						Danach:
 						<ul>
-							<li>1995</li>
 							<li>Oracle und PL-SQL</li>
 							<li>Richtiger Shop, sogar Mandantenfähigkeit</li>
 						</ul>
 					</aside>
 		    </section>
 		    <section>
-		      <img class="stretch" src="img/ottode2002.jpg"/>
+		      <img class="stretch" src="img/ottode2002.png"/>
 					<aside class="notes">
 						<ul>
+							<li>2002</li>
 							<li>Intershop</li>
 							<li>Rund zehn Jahre mit massivem Customizing</li>
-							<li>"Dienstag ist Deployment-Tag"</li>
+							<li>"Dienstag ist Deployment-Tag" - für Datenversorgung!</li>
 						</ul>
+					</aside>
+		    </section>
+		    <section>
+		      <img class="stretch" src="img/ottode2005.jpg"/>
+					<aside class="notes">
 					</aside>
 		    </section>
 		    <section>
@@ -120,7 +146,7 @@
 							<li>Keimzelle agile Transformation</li>
 							<li>Vertikalen (bounded context, microfrontend)</li>
 							<li>asynchrone Datenversorgung</li>
-							<li>Deployments: wöchentlich bis täglich</li>
+							<li>Deployments: etwa wöchentlich</li>
 						</ul>
 					</aside>
 		    </section>
@@ -133,6 +159,7 @@
 							<li>Mobile last</li>
 							<li>Full responsive</li>
 							<li>nochmal mehrere Jahre bis JQuery weg</li>
+							<li>Deployments: etwa täglich</li>
 						</ul>
 					</aside>
 		    </section>
@@ -247,7 +274,13 @@
 					<img data-src="Cdcs11.png">
 				</section>
 				<section data-transition="none">
-					<img data-src="Cdcs12.png">
+					<img data-src="Cdcs12a.png">
+				</section>
+				<section data-transition="none">
+					<img data-src="Cdcs12b.png">
+				</section>
+				<section data-transition="none">
+					<img data-src="Cdcs12d.png">
 					<aside class="notes">
 						<ul>
 							<li>Client-Pipeline kein Secret mehr</li>
@@ -264,7 +297,7 @@
 						Client-Pipeline muss Test irgendwo für Server-Team bereitstellen
 					</aside>
 				</section>
-				<section id="cdcTestVanilla" data-transition="none slide-out">
+				<section id="cdcTestVanilla" data-transition="none">
 					<img data-src="Cdcs14.png">
 					<aside class="notes">
 						Bereitstellen mit Artifactory
@@ -354,13 +387,27 @@
 						</ul>
 					</aside>
 				</section>
-				<section id="cdcCloudProblem" data-transition="none slide-out">
+				<section data-transition="none">
 					<img data-src="Cdcs31.png">
 					<aside class="notes">
 						<ul>
-							<li>Test-Request von der Pipeline muss separat freigeschaltet werden</li>
 							<li>Ausgang von Pipeline ist nicht schlimm, wegen Dependency-Download von überall her</li>
+						</ul>
+					</aside>
+				</section>
+				<section data-transition="none">
+					<img data-src="Cdcs32.png">
+					<aside class="notes">
+						<ul>
+							<li>Test-Request von der Pipeline muss separat freigeschaltet werden</li>
 							<li>Zugang zu Server-Netz ist schon blöd, weil nur für tests</li>
+						</ul>
+					</aside>
+				</section>
+				<section id="cdcCloudProblem" data-transition="none slide-out">
+					<img data-src="Cdcs33.png">
+					<aside class="notes">
+						<ul>
 							<li>Server team muss inzwischen also schon
 								<ul>
 									<li>Riesiges Artefact downloaden</li>
@@ -377,12 +424,15 @@
 					<img data-src="wishlist04.png">
 				</section>
 				<section id="cdcCloudProblem" data-transition="slide-in none">
-					<img data-src="Cdcs31.png">
+					<img data-src="Cdcs33.png">
 					<aside class="notes">
 						<ul>
 							<li>Wieder mehr in Richtung Client-Team?</li>
 						</ul>
 					</aside>
+				</section>
+				<section data-transition="none">
+					<img data-src="Cdcs39.png">
 				</section>
 				<section data-transition="none">
 					<img data-src="Cdcs40.png">
@@ -445,6 +495,11 @@
 				</section>
 				<section>
 					<img data-src="Cdcs45.png">
+					<aside class="notes">
+						<ul>
+							<li>250MB Größenbeschränkung</li>
+						</ul>
+					</aside>
 				</section>
 				<section>
 					<img data-src="wishlist08.png">
@@ -514,7 +569,7 @@
 					{ src: 'plugin/title-footer/title-footer.js', async: true, callback: function() { title_footer.initialize('Tom Vollerthun', 'no-repeat url("img/otto_logo_2015.png") left center;'); } }
 				],
 				slideNumber: 'c/t',
-				progress: false,
+				progress: false
 			});
 		</script>
 	</body>
